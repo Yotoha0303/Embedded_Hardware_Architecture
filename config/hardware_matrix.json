@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "platform": "Omarchy (Arch Linux + Hyprland)",
+  "hardware_targets": [
+    {
+      "chip": "ESP32-S3",
+      "architecture": "Xtensa dual-core 32-bit LX7",
+      "max_frequency": "240 MHz",
+      "vector_instructions": "Supported (AI / DSP)",
+      "usb_modes": [
+        {
+          "mode": "Native USB-JTAG/CDC",
+          "vid": "303a",
+          "pid": "1001",
+          "default_device": "/dev/ttyACM0",
+          "pins": "GPIO19 (D-), GPIO20 (D+)",
+          "features": "Direct USB debugging, Hardware JTAG breakpoints, CDC Serial without extra chip"
+        },
+        {
+          "mode": "External USB-UART (CH340/CP2102)",
+          "vid": "1a86:7523 / 10c4:ea60",
+          "default_device": "/dev/ttyUSB0",
+          "pins": "GPIO43 (TXD0), GPIO44 (RXD0)",
+          "features": "Traditional UART bridge, Auto-download circuit via RTS/DTR"
+        }
+      ],
+      "display_recommendations": {
+        "panel_1_3_inch": "ST7789 / SH1106 (SPI, 240x240 / I2C, 128x64)",
+        "ui_framework": "LVGL v8 / v9",
+        "designer": "SquareLine Studio"
+      }
+    },
+    {
+      "chip": "ESP32-C3",
+      "architecture": "RISC-V 32-bit single-core",
+      "max_frequency": "160 MHz",
+      "usb_modes": [
+        {
+          "mode": "Native USB-CDC",
+          "vid": "303a",
+          "pid": "1002",
+          "default_device": "/dev/ttyACM0"
+        }
+      ]
+    }
+  ]
+}

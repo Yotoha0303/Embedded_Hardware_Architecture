@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ESP-IDF: Build Starter Project",
+      "type": "shell",
+      "command": "bash -c 'source ~/.local/bin/get_idf 2>/dev/null || source ~/esp/esp-idf/export.sh && cd templates/esp32s3_starter && idf.py build'",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "ESP-IDF: Flash & Monitor Starter Project",
+      "type": "shell",
+      "command": "bash -c 'source ~/.local/bin/get_idf 2>/dev/null || source ~/esp/esp-idf/export.sh && cd templates/esp32s3_starter && idf.py flash monitor'",
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: Full Clean Starter Project",
+      "type": "shell",
+      "command": "bash -c 'source ~/.local/bin/get_idf 2>/dev/null || source ~/esp/esp-idf/export.sh && cd templates/esp32s3_starter && idf.py fullclean'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Hardware: Smoke Test Pipeline",
+      "type": "shell",
+      "command": "bash ./scripts/smoke_test.sh",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Launch: Start Development Environment",
+      "type": "shell",
+      "command": "./start.sh",
+      "problemMatcher": []
+    }
+  ]
+}

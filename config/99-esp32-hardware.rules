@@ -1,0 +1,36 @@
+# ==============================================================================
+# Omarchy Linux 嵌入式硬件设备 udev 免提权规则
+# 包含 Silicon Labs CP210x, 南京沁恒 CH340/CH341, FTDI FT232/FT2232, 
+# 以及乐鑫 ESP32 原生 USB-JTAG/CDC 接口
+# ==============================================================================
+
+# 1. Silicon Labs CP210x 系列 USB-to-UART 桥接芯片 (CP2102, CP2104 等)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE="0666", GROUP="uucp", TAG+="uaccess"
+
+# 2. 南京沁恒 CH340 / CH341 系列 USB 转串口芯片
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d4", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d4", MODE="0666", GROUP="uucp", TAG+="uaccess"
+
+# 3. FTDI 系列 USB 转串口 / 多功能接口芯片 (FT232R, FT2232H 等)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", MODE="0666", GROUP="uucp", TAG+="uaccess"
+
+# 4. 乐鑫 ESP32-S2 / ESP32-S3 原生硬件 USB-JTAG / CDC 调试接口 (GPIO19/20)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="0002", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="0002", MODE="0666", GROUP="uucp", TAG+="uaccess"
+
+# 5. 乐鑫 ESP32-C3 / ESP32-C6 原生硬件 USB-JTAG / CDC 接口
+SUBSYSTEM=="tty", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1002", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1002", MODE="0666", GROUP="uucp", TAG+="uaccess"
+
+# 6. CMSIS-DAP / DAPLink (用于 ARM Cortex-M / RISC-V 硬件调试器)
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0d28", ATTRS{idProduct}=="0204", MODE="0666", GROUP="uucp", TAG+="uaccess"
+SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="0d28", ATTRS{idProduct}=="0204", MODE="0666", GROUP="uucp", TAG+="uaccess"

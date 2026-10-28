@@ -1,0 +1,8 @@
+Omarchy Embedded Hardware & IoT Architecture
+Copyright 2026 Yotoha (https://github.com/Yotoha0303)
+
+This product includes software developed by:
+- Espressif Systems (https://www.espressif.com/) - ESP-IDF Framework (Apache License 2.0)
+- VOFA+ Project (https://www.vofa.plus/) - Embedded Waveform Debugging Protocol
+- FreeRTOS (https://www.freertos.org/) - Real-Time Operating System (MIT License)
+- Arch Linux & Omarchy Community (GPL/MIT)

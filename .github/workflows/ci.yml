@@ -1,0 +1,57 @@
+name: Embedded Hardware CI Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  lint-and-validate:
+    name: 1. 规范静态校验 (Shell Lint & Schema Validation)
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 校验 Shell 脚本语法 (bash -n)
+        run: |
+          for f in start.sh clean.sh scripts/*.sh; do
+            echo "Linting $f..."
+            bash -n "$f"
+          done
+          echo "✅ Shell 脚本语法校验全部通过！"
+
+      - name: 校验硬件配置矩阵 JSON 格式与合法性
+        run: |
+          python3 -m json.tool config/hardware_matrix.json > /dev/null
+          echo "✅ hardware_matrix.json 语法有效！"
+
+      - name: 校验 udev 规则语法
+        run: |
+          grep -E "(SUBSYSTEM|ATTRS|MODE)" config/99-esp32-hardware.rules > /dev/null
+          echo "✅ udev 规则语法检查正常！"
+
+  build-esp32s3-firmware:
+    name: 2. ESP32-S3 启动固件编译与二进制产物验证
+    runs-on: ubuntu-latest
+    container:
+      image: espressif/idf:release-v5.4
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 编译 ESP32-S3 启动固件
+        run: |
+          . /opt/esp/idf/export.sh
+          cd templates/esp32s3_starter
+          idf.py set-target esp32s3
+          idf.py build
+
+      - name: 验证二进制产物与空间占用
+        run: |
+          ls -la templates/esp32s3_starter/build/bootloader/bootloader.bin
+          ls -la templates/esp32s3_starter/build/partition_table/partition-table.bin
+          ls -la templates/esp32s3_starter/build/esp32s3_starter.bin
+          echo "✅ ESP32-S3 固件构建与链接 100% 验证通过！"

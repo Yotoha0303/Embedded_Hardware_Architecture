@@ -1,0 +1,41 @@
+# ESP-IDF 编译产物
+build/
+sdkconfig
+sdkconfig.old
+*.bin
+*.map
+*.elf
+
+# 编译器与构建临时文件
+*.o
+*.a
+*.d
+.ninja_*
+ninja.log
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+
+# 编辑器与系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+*.suo
+*.user
+*.sublime-project
+*.sublime-workspace
+
+# 串口与本地测试临时记录
+*.log
+local_test/
